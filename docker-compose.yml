@@ -16,7 +16,7 @@ services:
         volumes_from:
             - app
         depends_on:
-            - php
+            - mysql
 
     app:
         image: php:7.0-fpm
@@ -48,3 +48,5 @@ services:
             - mysql
         environment:
             PMA_HOST: mysql    
+volumes:
+    data:
