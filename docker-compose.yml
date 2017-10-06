@@ -5,19 +5,18 @@ services:
         build: ./nginx/
         ports:
             - 80:80
-        links:
-            - php
         volumes_from:
             - app
-
+        depends_on:
+            - php
     php:
         build: ./php/
         expose:
             - 9000
-        links:
-            - mysql
         volumes_from:
             - app
+        depends_on:
+            - php
 
     app:
         image: php:7.0-fpm
