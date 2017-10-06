@@ -1,46 +1,50 @@
-version: "2.2"
+version: "2.1"
 
 services:
     nginx:
         build: ./nginx/
         ports:
             - 80:80
-        volumes_from:
-            - app
+        volumes:
+            - ./www/html:/var/www/html:ro
+        networks:
+            - server    
         depends_on:
             - php
     php:
         build: ./php/
         expose:
             - 9000
-        volumes_from:
-            - app
-        depends_on:
-            - mysql
-
-    app:
-        image: php:7.0-fpm
         volumes:
             - ./www/html:/var/www/html
-        command: "true"
-
+        networks:
+            - server
+            - database
+        depends_on:
+            - mysql
     mysql:
         image: mysql:latest
         volumes:
             - data:/var/lib/mysql
+        networks:
+            - database
         environment:
             MYSQL_ROOT_PASSWORD: secret
             MYSQL_DATABASE: project
             MYSQL_USER: project
             MYSQL_PASSWORD: project
-
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
             - 8080:80
+        networks:
+            - database
         depends_on:
             - mysql
         environment:
             PMA_HOST: mysql    
 volumes:
     data:
+networks:
+    database:
+    server:
