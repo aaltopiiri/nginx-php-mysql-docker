@@ -11,6 +11,7 @@ services:
             - server    
         depends_on:
             - php
+            - puppet
     php:
         build: ./php/
         expose:
@@ -22,12 +23,15 @@ services:
             - database
         depends_on:
             - mysql
+            - puppet
     mysql:
         image: mysql:latest
         volumes:
             - data:/var/lib/mysql
         networks:
             - database
+        depends_on:
+            - puppet
         environment:
             MYSQL_ROOT_PASSWORD: secret
             MYSQL_DATABASE: project
@@ -41,8 +45,16 @@ services:
             - database
         depends_on:
             - mysql
+            - puppet
         environment:
             PMA_HOST: mysql    
+    puppet:
+        build: ./puppet/
+        ports:
+            - "2222:22"
+        networks: 
+            - database
+            - server
 volumes:
     data:
 networks:
