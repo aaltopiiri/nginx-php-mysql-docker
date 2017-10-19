@@ -28,8 +28,6 @@ services:
             - data:/var/lib/mysql
         networks:
             - database
-        depends_on:
-            - puppet
         environment:
             MYSQL_ROOT_PASSWORD: secret
             MYSQL_DATABASE: project
