@@ -45,13 +45,6 @@ services:
             - mysql
         environment:
             PMA_HOST: mysql    
-    puppet:
-        build: ./puppet/
-        ports:
-            - "2222:22"
-        networks: 
-            - database
-            - server
 volumes:
     data:
 networks:
