@@ -11,7 +11,6 @@ services:
             - server    
         depends_on:
             - php
-            - puppet
     php:
         build: ./php/
         expose:
@@ -23,7 +22,6 @@ services:
             - database
         depends_on:
             - mysql
-            - puppet
     mysql:
         image: mysql:latest
         volumes:
@@ -45,7 +43,6 @@ services:
             - database
         depends_on:
             - mysql
-            - puppet
         environment:
             PMA_HOST: mysql    
     puppet:
