@@ -7,8 +7,7 @@
     <body>
         <!--img src="http://tech.osteel.me/images/2015/12/18/docker-tutorial2.gif" alt="Hello World!" /-->
         <?php
-        phpinfo();
-        /*
+        /*phpinfo();*/
         $database   = $user = $password = "project";
         $host       = "mysql";
         $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
@@ -25,8 +24,6 @@
             }
             echo "</ul>";
         }
-        */
-
         ?>
     </body>
 </html>
