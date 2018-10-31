@@ -2,8 +2,8 @@
 
 $value = "World";
 $servername = "mysql";
-$username = "myuser";
-$password = "secret";
+$username = "phpmyadmin";
+$password = "phpmyadmin";
 
 try {
     $db = new PDO("mysql:host=$servername;dbname=mydb", $username, $password);

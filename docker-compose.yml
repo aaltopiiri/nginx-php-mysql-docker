@@ -28,10 +28,10 @@ services:
         build: 
             context: ./docker/mysql
         environment:
-            - MYSQL_DATABASE=mydb
-            - MYSQL_USER=myuser
-            - MYSQL_PASSWORD=secret
-            - MYSQL_ROOT_PASSWORD=docker  
+            - MYSQL_DATABASE=phpmyadmin
+            - MYSQL_USER=phpmyadmin
+            - MYSQL_PASSWORD=phpmyadmin
+            - MYSQL_ROOT_PASSWORD=secret  
 
         networks:
             - database
