@@ -31,9 +31,7 @@ services:
             - MYSQL_DATABASE=mydb
             - MYSQL_USER=myuser
             - MYSQL_PASSWORD=secret
-            - MYSQL_ROOT_PASSWORD=docker
-        expose:
-            - 3306
+            - MYSQL_ROOT_PASSWORD=docker  
         networks:
             - database
         volumes:
