@@ -7,7 +7,7 @@ services:
         ports:
             - 80:80
         volumes:
-            - ./src:/var/www/html:ro
+            - ./src/mediawiki:/var/www/html:ro
         networks:
             - server
         depends_on:
@@ -18,7 +18,7 @@ services:
         expose:
             - 9000
         volumes:
-            - ./src:/var/www/html
+            - ./src/mediawiki:/var/www/html
         networks:
             - server
             - database
@@ -32,22 +32,27 @@ services:
             - MYSQL_USER=myuser
             - MYSQL_PASSWORD=secret
             - MYSQL_ROOT_PASSWORD=docker  
-            
+
         networks:
             - database
         volumes:
-            - ./docker/mysql/data.sql:/docker-entrypoint-initdb.d/data.sql
+            - ./docker/mysql/phpmyadmin.sql:/docker-entrypoint-initdb.d/phpmyadmin.sql
             - persistent:/var/lib/mysql
+
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        environment:
+            #PMA_ARBITRARY: 1
+            PMA_HOST: mysql 
         ports:
             - 8080:80
         networks:
-            - database
-        depends_on:
-            - mysql
-        environment:
-            PMA_HOST: mysql    
+            - database    
+        volumes:
+            #- /sessions
+            - ./docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+            #- /custom/phpmyadmin/theme/:/www/themes/theme/        
 networks:
     database:
     server:

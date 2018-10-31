@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS 'phpmyadmin'
+  DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE phpmyadmin;
